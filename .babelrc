@@ -1,0 +1,12 @@
+{
+  "presets": [
+    "react-native",
+    "flow"
+  ],
+  "retainLines": true,
+  "env": {
+    "development": {
+      "plugins": ["transform-react-jsx-source"]
+    }
+  }
+}
