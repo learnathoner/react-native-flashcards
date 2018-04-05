@@ -1,0 +1,13 @@
+Flashcards:
+
+  Components:
+
+    FlashCard:
+      ☐ Front / back
+        ✔ Flipping animation @done (2018-4-5 11:32:39)
+      ☐ Right / wrong buttons
+
+  Bugs:
+    ☐ Shadow from card disappears on animate
+      ☐ Possible workaround - Wrap view in animated view
+

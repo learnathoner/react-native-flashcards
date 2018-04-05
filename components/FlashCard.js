@@ -54,13 +54,13 @@ class FlashCard extends Component {
         <TouchableWithoutFeedback onPress={() => this.flipCard()}>
           <Animated.View style={[styles.flashCard, frontAnimatedStyle]}>
             <Text style={styles.text}>Front</Text>
-            <Text>Hello world</Text>
+            <Text>Some question here?</Text>
           </Animated.View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => this.flipCard()}>
           <Animated.View style={[styles.flashCard, backAnimatedStyle, styles.flashCardBack]}>
             <Text style={styles.text}>Back</Text>
-            <Text>Hello world</Text>
+            <Text>Answer!</Text>
           </Animated.View>
         </TouchableWithoutFeedback>
       </View>
