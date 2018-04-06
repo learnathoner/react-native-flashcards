@@ -22,15 +22,16 @@ CREATE TABLE `cards` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `card_front` MEDIUMTEXT NULL DEFAULT NULL,
   `card_back` MEDIUMTEXT NULL DEFAULT NULL,
+  `deck_id` INTEGER NOT NULL,
   PRIMARY KEY (`id`)
 );
 		
-CREATE TABLE `deck_cards` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `deck_id` INTEGER NULL DEFAULT NULL,
-  `card_id` INTEGER NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
+-- CREATE TABLE `deck_cards` (
+--   `id` INTEGER NOT NULL AUTO_INCREMENT,
+--   `deck_id` INTEGER NULL DEFAULT NULL,
+--   `card_id` INTEGER NULL DEFAULT NULL,
+--   PRIMARY KEY (`id`)
+-- );
 		
 CREATE TABLE `user_decks` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
@@ -43,8 +44,7 @@ CREATE TABLE `user_decks` (
 -- Foreign Keys 
 -- ---
 
-ALTER TABLE `deck_cards` ADD FOREIGN KEY (deck_id) REFERENCES `decks` (`id`);
-ALTER TABLE `deck_cards` ADD FOREIGN KEY (card_id) REFERENCES `cards` (`id`);
+ALTER TABLE `cards` ADD FOREIGN KEY (deck_id) REFERENCES `decks` (`id`);
 ALTER TABLE `user_decks` ADD FOREIGN KEY (user_id) REFERENCES `users` (`id`);
 ALTER TABLE `user_decks` ADD FOREIGN KEY (deck_id) REFERENCES `decks` (`id`);
 
@@ -64,11 +64,23 @@ ALTER TABLE `user_decks` ADD FOREIGN KEY (deck_id) REFERENCES `decks` (`id`);
 
 INSERT INTO `users` (`username`,`password`) VALUES
 ('mike','1234');
+
+-- Insert decks
 INSERT INTO `decks` (`deckname`,`score`) VALUES
 ('deck1','40');
-INSERT INTO `cards` (`card_front`,`card_back`) VALUES
-('What is your name?','Batman');
-INSERT INTO `deck_cards` (`deck_id`,`card_id`) VALUES
-('1','1');
+INSERT INTO `decks` (`deckname`,`score`) VALUES
+('secondDeck','80');
+
+-- Insert cards
+INSERT INTO `cards` (`card_front`,`card_back`, `deck_id`) VALUES
+('What is your name?','Batman', '1');
+INSERT INTO `cards` (`card_front`,`card_back`, `deck_id`) VALUES
+('Another card?','Yep', '1');
+INSERT INTO `cards` (`card_front`,`card_back`, `deck_id`) VALUES
+('One more for deck...?', 'one', '1');
+INSERT INTO `cards` (`card_front`,`card_back`, `deck_id`) VALUES
+('Second deck?', 'sure', '2');
+
+-- User_decks
 INSERT INTO `user_decks` (`user_id`,`deck_id`) VALUES
 ('1','1');
