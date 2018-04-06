@@ -7,6 +7,20 @@ Flashcards:
         ✔ Flipping animation @done (2018-4-5 11:32:39)
       ☐ Right / wrong buttons
 
+    Deck:
+      ☐ Hold number of flashCards
+      ☐ Display each in random order
+      ☐ Hold score for quiz
+  
+  Server:
+    Home:
+      ☐ Get all decks
+        ☐ Add user
+      ☐ /decks
+        ☐ Add deck
+      ☐ /decks/id
+        ☐ Post cards
+
   Bugs:
     ☐ Shadow from card disappears on animate
       ☐ Possible workaround - Wrap view in animated view

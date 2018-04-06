@@ -7,7 +7,7 @@ export default class App extends React.Component {
   render() {
     
     fetch('http://localhost:3000/')
-      .then(res => res.text())
+      .then(res => res.json())
       .then(resJson => console.log(resJson))
       .catch(err => console.log(err))
 
