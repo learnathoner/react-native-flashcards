@@ -6,6 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 // Components
 import CardDisplay from './components/CardDisplay';
+import DeckLI from './components/DeckLI';
 import Deck from './components/Deck';
 import FlashCard from './components/FlashCard';
 
@@ -32,8 +33,6 @@ class HomeScreen extends React.Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ flex: 1 }} />
-
         {decks.length > 0 && (
           <List
             containerStyle={{
@@ -45,12 +44,12 @@ class HomeScreen extends React.Component {
             <FlatList
               data={[...decks]}
               renderItem={({ item }) => (
-                <Deck deck={item} navigation={this.props.navigation} />
+                <DeckLI deck={item} navigation={this.props.navigation} />
               )}
               keyExtractor={(item, index) => index}
             />
             <ListItem
-              title={'Add a new Deck  '}
+              title={'Add a new Deck'}
               rightIcon={
                 <MaterialIcons
                   name={'create-new-folder'}
@@ -61,8 +60,6 @@ class HomeScreen extends React.Component {
             />
           </List>
         )}
-
-        <View style={{ flex: 1 }} />
       </View>
     );
   }
@@ -86,8 +83,8 @@ export default (App = StackNavigator({
       headerTintColor: 'white',
       headerStyle: {
         backgroundColor: 'green'
-      },
-      title: 'Cards'
+      }
+      // title: 'Cards'
     }
   }
 }));
