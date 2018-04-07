@@ -20,11 +20,12 @@ Flashcards:
 
     New Deck:
       ✔ Choose name form and submit @done (2018-4-7 10:56:22)
+      ☐ Add Cancel button
       
       On submit:
         ✔ Send new deck to database / react native with name, cards 0, score 0 @done (2018-4-7 12:10:11)
         ✔ Clear input @done (2018-4-7 12:10:12)
-        ✔ Reload home screen @done (2018-4-7 12:10:12)
+        ✔ Reload home screen @done (2018-4-7 12:10:12
   
   Server:
     DB:
@@ -48,6 +49,8 @@ Flashcards:
       ☐ Possible workaround - Wrap view in animated view
 
 Add later:
+  SQL:
+    ☐ Redo nasty looking query
   Animations:
     ☐ Change transition on stackNavigator
 

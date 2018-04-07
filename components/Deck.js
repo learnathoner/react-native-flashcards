@@ -8,6 +8,7 @@ class Deck extends Component {
 
   render() {
     const { deck } = this.props.navigation.state.params;
+    console.log(deck);
 
     return (
       <View style={styles.container}>
@@ -18,10 +19,15 @@ class Deck extends Component {
             <Text style={styles.buttonText}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
+
         <View style={styles.quizOptionsContainer}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.props.navigation.navigate('AddCard', { deck })}
+          >
             <Text style={styles.buttonText}>Add Cards</Text>
           </TouchableOpacity>
+
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Delete Deck</Text>
           </TouchableOpacity>

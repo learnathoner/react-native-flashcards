@@ -10,6 +10,7 @@ import DeckLI from './components/DeckLI';
 import Deck from './components/Deck';
 import FlashCard from './components/FlashCard';
 import NewDeck from './components/NewDeck';
+import AddCard from './components/AddCard';
 
 class HomeScreen extends React.Component {
   state = {
@@ -99,6 +100,16 @@ export default (App = StackNavigator({
   },
   Card: {
     screen: FlashCard,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'green'
+      }
+      // title: 'Cards'
+    }
+  },
+  AddCard: {
+    screen: AddCard,
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {
