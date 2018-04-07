@@ -1,40 +1,51 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
-import CardDisplay from './components/CardDisplay'
-import Deck from './components/Deck'
+import { List, ListItem } from 'react-native-elements';
+import CardDisplay from './components/CardDisplay';
+import Deck from './components/Deck';
 
 export default class App extends React.Component {
-
   state = {
     decks: [],
     selectedDeck: '',
     cards: []
-  }
+  };
 
   componentDidMount() {
-    fetch('http://localhost:3000/')
+    fetch('https://udaci-flashcards.herokuapp.com/')
       .then(res => res.json())
-      .then(decks => this.setState({ decks }))
-      .catch(err => console.log(err))
+      .then(decks => {
+        console.log(decks);
+        this.setState({ decks });
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
     const { decks } = this.state;
-    const { decksContainer } = styles
+    const { decksContainer } = styles;
 
     return (
-      <View style={{flex: 1}}>
-        <CardDisplay />
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }} />
+
         {decks.length > 0 && (
-          <View style={decksContainer}>
+          <List
+            containerStyle={{
+              marginTop: 20,
+              borderTopWidth: 1,
+              borderBottomWidth: 1
+            }}
+          >
             <FlatList
-              data={[ ...decks ]}
-              renderItem={({ item }) => {
-                return <Deck deck={item} />}
-              }
+              data={[...decks]}
+              renderItem={({ item }) => <Deck deck={item} />}
+              keyExtractor={(item, index) => index}
             />
-          </View>
+          </List>
         )}
+
+        <View style={{ flex: 1 }} />
       </View>
     );
   }
@@ -46,4 +57,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   }
-})
+});
