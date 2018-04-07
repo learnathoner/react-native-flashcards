@@ -22,9 +22,9 @@ Flashcards:
       ✔ Choose name form and submit @done (2018-4-7 10:56:22)
       
       On submit:
-        ☐ Send new deck to database / react native with name, cards 0, score 0
-        ☐ Clear input
-        ☐ Reload home screen
+        ✔ Send new deck to database / react native with name, cards 0, score 0 @done (2018-4-7 12:10:11)
+        ✔ Clear input @done (2018-4-7 12:10:12)
+        ✔ Reload home screen @done (2018-4-7 12:10:12)
   
   Server:
     DB:

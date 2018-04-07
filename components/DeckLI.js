@@ -26,7 +26,7 @@ class DeckLI extends Component {
             </Text>
           </View>
         }
-        onPress={() => navigate('Deck', { deck: deck.deckname })}
+        onPress={() => navigate('Deck', { deck })}
       />
     );
   }
