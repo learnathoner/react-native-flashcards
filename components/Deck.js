@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { ListItem } from 'react-native-elements';
+import { FontAwesome } from '@expo/vector-icons';
 import Expo from 'expo';
 
 class Deck extends Component {
@@ -10,6 +11,7 @@ class Deck extends Component {
 
     return (
       <ListItem
+        rightIcon={<FontAwesome name={'arrow-circle-right'} size={50} />}
         title={deck.deckname}
         titleStyle={styles.title}
         subtitle={

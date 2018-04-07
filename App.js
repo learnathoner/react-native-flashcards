@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { List, ListItem } from 'react-native-elements';
+import { MaterialIcons } from '@expo/vector-icons';
 
 // Components
 import CardDisplay from './components/CardDisplay';
@@ -48,6 +49,16 @@ class HomeScreen extends React.Component {
               )}
               keyExtractor={(item, index) => index}
             />
+            <ListItem
+              title={'Add a new Deck  '}
+              rightIcon={
+                <MaterialIcons
+                  name={'create-new-folder'}
+                  size={25}
+                  titleStyle={{ padding: 20 }}
+                />
+              }
+            />
           </List>
         )}
 
@@ -58,9 +69,27 @@ class HomeScreen extends React.Component {
 }
 
 export default (App = StackNavigator({
-  Home: { screen: HomeScreen },
+  Home: {
+    screen: HomeScreen,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'blue'
+      },
+      title: 'Decks'
+    }
+  },
   Deck: { screen: Deck },
-  Card: { screen: FlashCard }
+  Card: {
+    screen: FlashCard,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'green'
+      },
+      title: 'Cards'
+    }
+  }
 }));
 
 const styles = StyleSheet.create({
