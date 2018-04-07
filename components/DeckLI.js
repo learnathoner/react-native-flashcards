@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import Expo from 'expo';
 
 class DeckLI extends Component {
@@ -11,7 +11,7 @@ class DeckLI extends Component {
 
     return (
       <ListItem
-        rightIcon={<FontAwesome name={'arrow-circle-right'} size={50} />}
+        rightIcon={<MaterialIcons name={'keyboard-arrow-right'} size={50} />}
         title={deck.deckname}
         titleStyle={styles.title}
         subtitle={
@@ -21,8 +21,8 @@ class DeckLI extends Component {
               {deck.cardcount},
             </Text>
             <Text>
-              <Text style={{ fontWeight: 'bold' }}>Quiz Average:</Text>{' '}
-              {deck.score}
+              <Text style={{ fontWeight: 'bold' }}>Last Score:</Text>{' '}
+              {deck.score}%
             </Text>
           </View>
         }

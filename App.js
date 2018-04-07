@@ -9,6 +9,7 @@ import CardDisplay from './components/CardDisplay';
 import DeckLI from './components/DeckLI';
 import Deck from './components/Deck';
 import FlashCard from './components/FlashCard';
+import NewDeck from './components/NewDeck';
 
 class HomeScreen extends React.Component {
   state = {
@@ -18,14 +19,18 @@ class HomeScreen extends React.Component {
   };
 
   componentDidMount() {
-    fetch('https://udaci-flashcards.herokuapp.com/')
+    this.updateDecks();
+  }
+
+  updateDecks = () => {
+    fetch('http://127.0.0.1:3000')
       .then(res => res.json())
       .then(decks => {
         console.log(decks);
         this.setState({ decks });
       })
       .catch(err => console.log(err));
-  }
+  };
 
   render() {
     const { decks } = this.state;
@@ -57,6 +62,11 @@ class HomeScreen extends React.Component {
                   titleStyle={{ padding: 20 }}
                 />
               }
+              onPress={() =>
+                this.props.navigation.navigate('NewDeck', {
+                  updateDecks: this.updateDecks
+                })
+              }
             />
           </List>
         )}
@@ -77,6 +87,16 @@ export default (App = StackNavigator({
     }
   },
   Deck: { screen: Deck },
+  NewDeck: {
+    screen: NewDeck,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'black'
+      },
+      title: 'Add New Deck'
+    }
+  },
   Card: {
     screen: FlashCard,
     navigationOptions: {

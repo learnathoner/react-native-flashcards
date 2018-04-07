@@ -7,21 +7,47 @@ Flashcards:
         ✔ Flipping animation @done (2018-4-5 11:32:39)
       ☐ Right / wrong buttons
 
+    Deck Screen:
+      ☐ Makes request for cards?
+      ☐ Displays cards, basic info
+      ☐ Add card option
+      ☐ Delete deck option
+
     Deck:
       ☐ Hold number of flashCards
       ☐ Display each in random order
       ☐ Hold score for quiz
+
+    New Deck:
+      ✔ Choose name form and submit @done (2018-4-7 10:56:22)
+      
+      On submit:
+        ☐ Send new deck to database / react native with name, cards 0, score 0
+        ☐ Clear input
+        ☐ Reload home screen
   
   Server:
+    DB:
+      ✔ Set up Postgres @done (2018-4-6 16:16:14)
+      ✔ Connect postgres to heroku @done (2018-4-6 16:16:15)
+      ✔ Connect sequelize to remote postgres @done (2018-4-6 16:16:15)
+    
     Home:
-      ☐ Get all decks
+      ✔ Get all decks @done (2018-4-6 16:17:35)
         ☐ Add user
-      ☐ /decks
+        ✔ Clicking on deck sends request to /decks with deckname @done (2018-4-6 21:24:40)
+      ✔ /decks - get deck by name @done (2018-4-6 16:18:05)
         ☐ Add deck
       ☐ /decks/id
         ☐ Post cards
 
+    ☐ Change Fetch requests in app, and newdeck to https://udaci-flashcards.herokuapp.com/ @critical 
+
   Bugs:
     ☐ Shadow from card disappears on animate
       ☐ Possible workaround - Wrap view in animated view
+
+Add later:
+  Animations:
+    ☐ Change transition on stackNavigator
 

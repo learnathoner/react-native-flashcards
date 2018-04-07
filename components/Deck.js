@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 class Deck extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -9,7 +9,17 @@ class Deck extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text />
+        <View style={styles.container}>
+          <Text>Card info</Text>
+        </View>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Add Cards</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Delete Deck</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -20,7 +30,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2c3e50'
+    backgroundColor: 'tan'
+  },
+  button: {
+    margin: 10,
+    padding: 10,
+    width: 150,
+    backgroundColor: 'purple',
+    borderRadius: 10,
+    justifyContent: 'center'
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold'
   }
 });
 
