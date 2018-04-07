@@ -53,15 +53,15 @@ class AddCard extends Component {
 
   handleSubmit = () => {
     const value = this._form.getValue();
-    const { cardFront: card_front, cardBack: card_back } = value;
-    const { id: deck_id, deckname } = this.props.navigation.state.params.deck;
+    const { cardFront, cardBack } = value;
+    const { id: deckId, deckname } = this.props.navigation.state.params.deck;
+    const { updateDecks } = this.props.navigation.state.params;
 
     this.setState({ value: '' });
-    console.log(card_front, card_back, deck_id);
 
     fetch(`http://127.0.0.1:3000/decks/${deckname}`, {
       method: 'POST',
-      body: JSON.stringify({ card_front, card_back, deck_id }),
+      body: JSON.stringify({ cardFront, cardBack, deckId }),
       headers: {
         'content-type': 'application/json'
       }

@@ -6,7 +6,7 @@ import Expo from 'expo';
 
 class DeckLI extends Component {
   render() {
-    const { deck } = this.props;
+    const { deck, updateDecks } = this.props;
     const { navigate } = this.props.navigation;
 
     return (
@@ -26,7 +26,7 @@ class DeckLI extends Component {
             </Text>
           </View>
         }
-        onPress={() => navigate('Deck', { deck })}
+        onPress={() => navigate('Deck', { deck, updateDecks })}
       />
     );
   }

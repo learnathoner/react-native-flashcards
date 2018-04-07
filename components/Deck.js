@@ -7,7 +7,7 @@ class Deck extends Component {
   });
 
   render() {
-    const { deck } = this.props.navigation.state.params;
+    const { deck, updateDecks } = this.props.navigation.state.params;
     console.log(deck);
 
     return (
@@ -23,7 +23,9 @@ class Deck extends Component {
         <View style={styles.quizOptionsContainer}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => this.props.navigation.navigate('AddCard', { deck })}
+            onPress={() =>
+              this.props.navigation.navigate('AddCard', { deck, updateDecks })
+            }
           >
             <Text style={styles.buttonText}>Add Cards</Text>
           </TouchableOpacity>

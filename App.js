@@ -50,7 +50,11 @@ class HomeScreen extends React.Component {
             <FlatList
               data={[...decks]}
               renderItem={({ item }) => (
-                <DeckLI deck={item} navigation={this.props.navigation} />
+                <DeckLI
+                  deck={item}
+                  navigation={this.props.navigation}
+                  updateDecks={this.updateDecks}
+                />
               )}
               keyExtractor={(item, index) => index}
             />
