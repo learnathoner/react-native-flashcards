@@ -42,7 +42,13 @@ Flashcards:
       ☐ /decks/id
         ☐ Post cards
 
-    ☐ Change Fetch requests in app, and newdeck to https://udaci-flashcards.herokuapp.com/ @critical 
+    ☐ Change Fetch requests in app, quiz, newdeck to https://udaci-flashcards.herokuapp.com/ @critical 
+    ☐ Handle duplicate Deck names @critical
+
+    Quiz:
+      ☐ Show cardContainer
+      ☐ Manage cards with state
+      ☐ On finish, show score, update db
 
   Bugs:
     ☐ Shadow from card disappears on animate

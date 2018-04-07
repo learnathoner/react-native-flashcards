@@ -11,6 +11,7 @@ import Deck from './components/Deck';
 import FlashCard from './components/FlashCard';
 import NewDeck from './components/NewDeck';
 import AddCard from './components/AddCard';
+import Quiz from './components/Quiz';
 
 class HomeScreen extends React.Component {
   state = {
@@ -109,7 +110,6 @@ export default (App = StackNavigator({
       headerStyle: {
         backgroundColor: 'green'
       }
-      // title: 'Cards'
     }
   },
   AddCard: {
@@ -119,7 +119,16 @@ export default (App = StackNavigator({
       headerStyle: {
         backgroundColor: 'green'
       }
-      // title: 'Cards'
+    }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'black'
+      },
+      title: 'QUIZ'
     }
   }
 }));

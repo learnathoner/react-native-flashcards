@@ -42,6 +42,7 @@ class FlashCard extends Component {
   }
 
   render() {
+    // Animation functions
     const frontAnimatedStyle = {
       transform: [{ rotateY: this.frontInterpolate }]
     };
@@ -49,18 +50,22 @@ class FlashCard extends Component {
       transform: [{ rotateY: this.backInterpolate }]
     };
 
+    const { question, answer } = this.props;
+
     return (
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={() => this.flipCard()}>
           <Animated.View style={[styles.flashCard, frontAnimatedStyle]}>
-            <Text style={styles.text}>Front</Text>
-            <Text>Some question here?</Text>
+            <Text style={styles.text}>Question:</Text>
+            <Text style={styles.cardText}>{question}</Text>
           </Animated.View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => this.flipCard()}>
-          <Animated.View style={[styles.flashCard, backAnimatedStyle, styles.flashCardBack]}>
-            <Text style={styles.text}>Back</Text>
-            <Text>Answer!</Text>
+          <Animated.View
+            style={[styles.flashCard, backAnimatedStyle, styles.flashCardBack]}
+          >
+            <Text style={styles.text}>Answer:</Text>
+            <Text style={styles.cardText}>{answer}</Text>
           </Animated.View>
         </TouchableWithoutFeedback>
       </View>
@@ -71,8 +76,9 @@ class FlashCard extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 3,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'stretch'
   },
   flashCard: {
     flex: 1,
@@ -97,12 +103,14 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0
-
   },
   text: {
-    color: 'red',
     fontSize: 30,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textDecorationLine: 'underline'
+  },
+  cardText: {
+    fontSize: 20
   }
 });
 
