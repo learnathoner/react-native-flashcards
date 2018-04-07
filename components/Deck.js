@@ -6,6 +6,7 @@ import Expo from 'expo';
 class Deck extends Component {
   render() {
     const { deck } = this.props;
+    const { navigate } = this.props.navigation;
 
     return (
       <ListItem
@@ -23,6 +24,7 @@ class Deck extends Component {
             </Text>
           </View>
         }
+        onPress={() => navigate('Card')}
       />
     );
   }

@@ -1,10 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 import { List, ListItem } from 'react-native-elements';
+
+// Components
 import CardDisplay from './components/CardDisplay';
 import Deck from './components/Deck';
+import FlashCard from './components/FlashCard';
 
-export default class App extends React.Component {
+class HomeScreen extends React.Component {
   state = {
     decks: [],
     selectedDeck: '',
@@ -39,7 +43,9 @@ export default class App extends React.Component {
           >
             <FlatList
               data={[...decks]}
-              renderItem={({ item }) => <Deck deck={item} />}
+              renderItem={({ item }) => (
+                <Deck deck={item} navigation={this.props.navigation} />
+              )}
               keyExtractor={(item, index) => index}
             />
           </List>
@@ -50,6 +56,12 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default (App = StackNavigator({
+  Home: { screen: HomeScreen },
+  Deck: { screen: Deck },
+  Card: { screen: FlashCard }
+}));
 
 const styles = StyleSheet.create({
   decksContainer: {
