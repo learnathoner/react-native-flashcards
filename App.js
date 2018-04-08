@@ -4,6 +4,11 @@ import { StackNavigator } from 'react-navigation';
 import { List, ListItem } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
 
+// Redux
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers/reducer';
+
 // Components
 import CardDisplay from './components/CardDisplay';
 import DeckLI from './components/DeckLI';
@@ -28,7 +33,6 @@ class HomeScreen extends React.Component {
     fetch('http://127.0.0.1:3000')
       .then(res => res.json())
       .then(decks => {
-        console.log(decks);
         this.setState({ decks });
       })
       .catch(err => console.log(err));
@@ -81,7 +85,7 @@ class HomeScreen extends React.Component {
   }
 }
 
-export default (App = StackNavigator({
+const AppNavigation = StackNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
@@ -131,7 +135,19 @@ export default (App = StackNavigator({
       title: 'QUIZ'
     }
   }
-}));
+});
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <Provider store={createStore(reducer)}>
+        <View style={{ flex: 1 }}>
+          <AppNavigation />
+        </View>
+      </Provider>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   decksContainer: {
