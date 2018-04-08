@@ -19,7 +19,7 @@ class Deck extends Component {
             style={[styles.button, { marginTop: 40 }]}
             onPress={() =>
               this.props.navigation.navigate('Quiz', {
-                deckname: deck.deckname
+                deck
               })
             }
           >

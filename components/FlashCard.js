@@ -25,6 +25,13 @@ class FlashCard extends Component {
       outputRange: ['180deg', '360deg']
     });
   }
+
+  // Flips card to front each time it receives props
+  componentWillReceiveProps() {
+    if (this.value >= 90) this.flipCard();
+  }
+
+  // Flips card to front / back based on this.value
   flipCard() {
     if (this.value >= 90) {
       Animated.spring(this.animatedValue, {
@@ -49,6 +56,7 @@ class FlashCard extends Component {
     const backAnimatedStyle = {
       transform: [{ rotateY: this.backInterpolate }]
     };
+    // ---------
 
     const { question, answer } = this.props;
 

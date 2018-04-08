@@ -46,9 +46,14 @@ Flashcards:
     ☐ Handle duplicate Deck names @critical
 
     Quiz:
-      ☐ Show cardContainer
-      ☐ Manage cards with state
-      ☐ On finish, show score, update db
+      ✔ Show cardContainer @done (2018-4-7 17:04:42)
+      ✔ Manage cards with state @done (2018-4-7 17:04:44)
+
+      On finish:
+        ☐ Remove card x / x screen
+        ☐ show score
+        ☐ Update DB
+        ☐ Reset button
 
   Bugs:
     ☐ Shadow from card disappears on animate
@@ -59,4 +64,6 @@ Add later:
     ☐ Redo nasty looking query
   Animations:
     ☐ Change transition on stackNavigator
+  Server routes:
+    ☐ Make routes use deck_id instead of deckname
 
