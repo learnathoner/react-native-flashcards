@@ -5,12 +5,12 @@ import { StackNavigator } from 'react-navigation';
 // Redux
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './reducers/reducer';
+import reducer from './reducers';
+import devToolsEnhancer from 'remote-redux-devtools';
 
 // Components
 import HomeScreen from './components/HomeScreen';
 import CardDisplay from './components/CardDisplay';
-import DeckLI from './components/DeckLI';
 import Deck from './components/Deck';
 import FlashCard from './components/FlashCard';
 import NewDeck from './components/NewDeck';
@@ -69,10 +69,12 @@ const AppNavigation = StackNavigator({
   }
 });
 
+const store = createStore(reducer, devToolsEnhancer());
+
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={store}>
         <View style={{ flex: 1 }}>
           <AppNavigation />
         </View>

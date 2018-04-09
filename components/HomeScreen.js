@@ -2,12 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
 
 import DeckLI from './DeckLI';
 
+import { receiveDecks } from '../actions';
+
 class HomeScreen extends React.Component {
   state = {
-    decks: [],
     selectedDeck: '',
     cards: []
   };
@@ -20,18 +22,42 @@ class HomeScreen extends React.Component {
     fetch('http://127.0.0.1:3000')
       .then(res => res.json())
       .then(decks => {
-        this.setState({ decks });
+        const allDecks = new Set();
+
+        // Reduces decks structure from DB to match store structure
+        const flattenedDecks = decks.reduce((flatDecks, deck) => {
+          allDecks.add(deck.id);
+
+          flatDecks[deck.id]
+            ? flatDecks[deck.id].cardIds.push(deck.card_id)
+            : (flatDecks[deck.id] = {
+                deckname: deck.deckname,
+                score: deck.score,
+                cardIds: [deck.card_id]
+              });
+
+          return flatDecks;
+        }, {});
+
+        const deckStore = {
+          byId: flattenedDecks,
+          allDecks
+        };
+
+        this.props.receiveDecks(deckStore);
       })
       .catch(err => console.log(err));
   };
 
   render() {
-    const { decks } = this.state;
+    const { decks } = this.props;
     const { decksContainer } = styles;
+
+    console.log('decks in home: ', decks);
 
     return (
       <View style={{ flex: 1 }}>
-        {decks.length > 0 && (
+        {decks && (
           <List
             containerStyle={{
               marginTop: 20,
@@ -72,7 +98,27 @@ class HomeScreen extends React.Component {
   }
 }
 
-export default HomeScreen;
+const mapStateToProps = (state, ownProps) => {
+  const decks = state.decks.allDecks
+    ? [...state.decks.allDecks].map(id => {
+        return state.decks.byId[id];
+      })
+    : [];
+
+  console.log(decks);
+
+  return {
+    decks
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    receiveDecks: decks => dispatch(receiveDecks(decks))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 
 const styles = StyleSheet.create({
   decksContainer: {

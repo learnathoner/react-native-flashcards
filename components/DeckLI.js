@@ -18,7 +18,7 @@ class DeckLI extends Component {
           <View>
             <Text>
               <Text style={{ fontWeight: 'bold' }}>Cards: </Text>{' '}
-              {deck.cardcount},
+              {deck.cardIds.length},
             </Text>
             <Text>
               <Text style={{ fontWeight: 'bold' }}>Last Score:</Text>{' '}
