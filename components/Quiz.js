@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import FlashCard from './FlashCard';
 
+import { connect } from 'react-redux';
+import { receiveCards, updateScore } from '../actions';
+
 class Quiz extends Component {
   state = {
     cards: [],
@@ -10,14 +13,14 @@ class Quiz extends Component {
     wrong: 0
   };
 
-  componentDidMount() {
+  componentWillMount() {
     // fetch cards for deck
     const { deck } = this.props.navigation.state.params;
 
     fetch(`http://127.0.0.1:3000/decks/${deck.deckname}`)
       .then(res => res.json())
       .then(cards => {
-        this.setState({ cards });
+        this.props.receiveCards(cards);
       })
       .catch(err => console.log(err));
   }
@@ -39,14 +42,13 @@ class Quiz extends Component {
 
   calculatePercent() {
     const { correct } = this.state;
-    const total = this.state.cards.length;
+    const total = this.props.cards.length;
     return Math.ceil(correct / total * 100);
   }
 
   updateScore() {
     const { deckname, id } = this.props.navigation.state.params.deck;
     const score = this.calculatePercent();
-    console.log('running updateScore');
 
     fetch(`http://127.0.0.1:3000/decks/${deckname}`, {
       method: 'PUT',
@@ -62,13 +64,15 @@ class Quiz extends Component {
   }
 
   render() {
-    const { currentCard, cards, correct, wrong } = this.state;
+    const { currentCard, correct, wrong } = this.state;
     const { deckname } = this.props.navigation.state.params;
-    // console.log(cards);
+    const { cards } = this.props;
+
+    console.log(cards);
 
     return (
       <View style={styles.container}>
-        {cards.length > 0 &&
+        {cards &&
           (currentCard <= cards.length ? (
             <View style={styles.container}>
               <View>
@@ -139,4 +143,25 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Quiz;
+const mapStateToProps = (state, ownProps) => {
+  const { deck } = ownProps.navigation.state.params;
+
+  const cards = [];
+
+  state.decks.byId[deck.id].cardIds.forEach(cardId => {
+    const card = state.cards.byId[cardId];
+    if (card) {
+      cards.push(card);
+    }
+  });
+
+  return { cards };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    receiveCards: cards => dispatch(receiveCards(cards))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Quiz);

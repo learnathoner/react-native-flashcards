@@ -47,7 +47,7 @@ const decks = (state = {}, action) => {
   }
 };
 
-const cards = (state = {}, action) => {
+const cards = (state = { byId: {} }, action) => {
   switch (action.type) {
     case RECEIVE_CARDS: {
       const stateCopy = { ...state };
