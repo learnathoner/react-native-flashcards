@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux';
 
-import { RECEIVE_DECKS, ADD_DECK, RECEIVE_CARDS, ADD_CARD } from '../actions';
+import {
+  RECEIVE_DECKS,
+  ADD_DECK,
+  RECEIVE_CARDS,
+  ADD_CARD,
+  UPDATE_SCORE
+} from '../actions';
 
 const decks = (state = {}, action) => {
   switch (action.type) {
@@ -37,6 +43,21 @@ const decks = (state = {}, action) => {
           [deck_id]: {
             ...state.byId[deck_id],
             cardIds: state.byId[deck_id].cardIds.concat(id)
+          }
+        }
+      };
+    }
+
+    case UPDATE_SCORE: {
+      const { deckId, score } = action;
+
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [deckId]: {
+            ...state.byId[deckId],
+            score
           }
         }
       };

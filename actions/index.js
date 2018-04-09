@@ -31,3 +31,11 @@ export const addCard = card => {
     card
   };
 };
+
+export const updateScore = ({ deckId, score }) => {
+  return {
+    type: UPDATE_SCORE,
+    deckId,
+    score
+  };
+};

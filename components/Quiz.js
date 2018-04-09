@@ -57,9 +57,7 @@ class Quiz extends Component {
         'content-type': 'application/json'
       }
     }).then(() => {
-      // TODO: Update specific deck
-      console.log('updated');
-      // updateDecks();
+      this.props.updateScore({ deckId: id, score });
     });
   }
 
@@ -67,8 +65,6 @@ class Quiz extends Component {
     const { currentCard, correct, wrong } = this.state;
     const { deckname } = this.props.navigation.state.params;
     const { cards } = this.props;
-
-    console.log(cards);
 
     return (
       <View style={styles.container}>
@@ -160,7 +156,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    receiveCards: cards => dispatch(receiveCards(cards))
+    receiveCards: cards => dispatch(receiveCards(cards)),
+    updateScore: deckId => dispatch(updateScore(deckId))
   };
 };
 
