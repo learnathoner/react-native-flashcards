@@ -14,7 +14,7 @@ class Deck extends Component {
       <View style={styles.container}>
         <View style={styles.quizContainer}>
           <Text style={styles.deckTitle}>{deck.deckname}</Text>
-          <Text>This deck currently has {deck.cardcount} cards</Text>
+          <Text>This deck currently has {deck.cardIds.length} cards</Text>
           <TouchableOpacity
             style={[styles.button, { marginTop: 40 }]}
             onPress={() =>

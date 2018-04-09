@@ -11,6 +11,13 @@ export const receiveDecks = decks => {
   };
 };
 
+export const addDeck = deck => {
+  return {
+    type: ADD_DECK,
+    deck
+  };
+};
+
 export const receiveCards = cards => {
   return {
     type: RECEIVE_CARDS,

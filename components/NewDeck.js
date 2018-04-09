@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import t from 'tcomb-form-native';
 
+import { connect } from 'react-redux';
+import { addDeck } from '../actions';
+
 /**** FORM CREATION AND STYLING *****/
 
 const Form = t.form.Form;
@@ -59,10 +62,14 @@ class NewDeck extends Component {
       headers: {
         'content-type': 'application/json'
       }
-    }).then(() => {
-      updateDecks();
-      this.props.navigation.dispatch(NavigationActions.back());
-    });
+    })
+      .then(res => res.json())
+      .then(addedDeckQuery => {
+        const newDeck = addedDeckQuery[0];
+        newDeck.cardIds = [];
+        this.props.addDeck(newDeck);
+        this.props.navigation.dispatch(NavigationActions.back());
+      });
   };
 
   render() {
@@ -90,4 +97,14 @@ const styles = StyleSheet.create({
   }
 });
 
-export default NewDeck;
+const mapStateToProps = (state, ownProps) => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addDeck: deck => dispatch(addDeck(deck))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewDeck);

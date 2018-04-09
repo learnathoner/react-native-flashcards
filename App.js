@@ -69,7 +69,7 @@ const AppNavigation = StackNavigator({
   }
 });
 
-const store = createStore(reducer, devToolsEnhancer());
+const store = createStore(reducer, devToolsEnhancer({ realtime: true }));
 
 export default class App extends React.Component {
   render() {

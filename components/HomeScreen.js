@@ -26,6 +26,8 @@ class HomeScreen extends React.Component {
 
         // Reduces decks structure from DB to match store structure
         const flattenedDecks = decks.reduce((flatDecks, deck) => {
+          const deckCard = deck.card_id;
+
           allDecks.add(deck.id);
 
           flatDecks[deck.id]
@@ -33,7 +35,7 @@ class HomeScreen extends React.Component {
             : (flatDecks[deck.id] = {
                 deckname: deck.deckname,
                 score: deck.score,
-                cardIds: [deck.card_id]
+                cardIds: deckCard !== null ? [deckCard] : []
               });
 
           return flatDecks;
