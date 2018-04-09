@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  KeyboardAvoidingView
+} from 'react-native';
 import t from 'tcomb-form-native';
 
 import { connect } from 'react-redux';
@@ -61,7 +67,7 @@ class AddCard extends Component {
 
     this.setState({ value: '' });
 
-    fetch(`http://127.0.0.1:3000/decks/${deckname}`, {
+    fetch(`https://udaci-flashcards.herokuapp.com/decks/${deckname}`, {
       method: 'POST',
       body: JSON.stringify({ cardFront, cardBack, deckId }),
       headers: {
@@ -80,7 +86,7 @@ class AddCard extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Form
           value={this.state.value}
           type={CardInfo}
@@ -89,7 +95,7 @@ class AddCard extends Component {
         />
         <Button title="Add Card" onPress={this.handleSubmit} />
         <Button title="Back to Deck" onPress={this.goBack} />
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

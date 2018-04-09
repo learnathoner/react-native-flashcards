@@ -9,7 +9,7 @@ import {
   Animated
 } from 'react-native';
 
-class FlashCard extends Component {
+class IosFlashcard extends Component {
   componentWillMount() {
     this.animatedValue = new Animated.Value(0);
     this.value = 0;
@@ -122,4 +122,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default FlashCard;
+export default IosFlashcard;

@@ -19,7 +19,7 @@ class HomeScreen extends React.Component {
   }
 
   updateDecks = () => {
-    fetch('http://127.0.0.1:3000')
+    fetch('https://udaci-flashcards.herokuapp.com')
       .then(res => res.json())
       .then(decks => {
         const allDecks = new Set();

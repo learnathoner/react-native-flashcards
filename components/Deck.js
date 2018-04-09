@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { connect } from 'react-redux';
-import { receiveCards } from '../actions';
+import { receiveCards, deleteDeck } from '../actions';
 
 class Deck extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.state.params.deck.deckname}`
   });
+
+  deleteDeck = () => {
+    // const { id } = this.props.deck;
+    // this.props.deleteDeck(id);
+    // this.props.navigation.goBack();
+  };
 
   render() {
     const { deck } = this.props;
@@ -39,7 +45,7 @@ class Deck extends Component {
             <Text style={styles.buttonText}>Add Cards</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={this.deleteDeck}>
             <Text style={styles.buttonText}>Delete Deck</Text>
           </TouchableOpacity>
         </View>
@@ -106,7 +112,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    deleteDeck: id => dispatch(deleteDeck(id))
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deck);

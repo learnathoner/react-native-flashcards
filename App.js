@@ -10,9 +10,7 @@ import devToolsEnhancer from 'remote-redux-devtools';
 
 // Components
 import HomeScreen from './components/HomeScreen';
-import CardDisplay from './components/CardDisplay';
 import Deck from './components/Deck';
-import FlashCard from './components/FlashCard';
 import NewDeck from './components/NewDeck';
 import AddCard from './components/AddCard';
 import Quiz from './components/Quiz';
@@ -37,15 +35,6 @@ const AppNavigation = StackNavigator({
         backgroundColor: 'black'
       },
       title: 'Add New Deck'
-    }
-  },
-  Card: {
-    screen: FlashCard,
-    navigationOptions: {
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: 'green'
-      }
     }
   },
   AddCard: {

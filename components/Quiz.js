@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import FlashCard from './FlashCard';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Platform
+} from 'react-native';
+import IosFlashcard from './IosFlashcard';
+import AndroidFlashcard from './AndroidFlashcard';
 
 import { connect } from 'react-redux';
 import { receiveCards, updateScore } from '../actions';
@@ -17,7 +24,7 @@ class Quiz extends Component {
     // fetch cards for deck
     const { deck } = this.props.navigation.state.params;
 
-    fetch(`http://127.0.0.1:3000/decks/${deck.deckname}`)
+    fetch(`https://udaci-flashcards.herokuapp.com/decks/${deck.deckname}`)
       .then(res => res.json())
       .then(cards => {
         this.props.receiveCards(cards);
@@ -50,7 +57,7 @@ class Quiz extends Component {
     const { deckname, id } = this.props.navigation.state.params.deck;
     const score = this.calculatePercent();
 
-    fetch(`http://127.0.0.1:3000/decks/${deckname}`, {
+    fetch(`https://udaci-flashcards.herokuapp.com/decks/${deckname}`, {
       method: 'PUT',
       body: JSON.stringify({ id, score }),
       headers: {
@@ -77,11 +84,19 @@ class Quiz extends Component {
                 </Text>
               </View>
 
-              <FlashCard
-                question={cards[currentCard - 1].card_front}
-                answer={cards[currentCard - 1].card_back}
-                currentCard={currentCard}
-              />
+              {Platform.OS === 'ios' ? (
+                <IosFlashcard
+                  question={cards[currentCard - 1].card_front}
+                  answer={cards[currentCard - 1].card_back}
+                  currentCard={currentCard}
+                />
+              ) : (
+                <AndroidFlashcard
+                  question={cards[currentCard - 1].card_front}
+                  answer={cards[currentCard - 1].card_back}
+                  currentCard={currentCard}
+                />
+              )}
 
               <View>
                 <TouchableOpacity

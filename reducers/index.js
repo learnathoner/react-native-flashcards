@@ -5,7 +5,8 @@ import {
   ADD_DECK,
   RECEIVE_CARDS,
   ADD_CARD,
-  UPDATE_SCORE
+  UPDATE_SCORE,
+  DELETE_DECK
 } from '../actions';
 
 const decks = (state = {}, action) => {
@@ -46,6 +47,15 @@ const decks = (state = {}, action) => {
           }
         }
       };
+    }
+
+    case DELETE_DECK: {
+      const { id } = action;
+      const stateCopy = { ...state };
+
+      delete stateCopy.byId[id];
+
+      return stateCopy;
     }
 
     case UPDATE_SCORE: {

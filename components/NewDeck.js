@@ -56,7 +56,7 @@ class NewDeck extends Component {
 
     this.setState({ value: '' });
 
-    fetch('http://127.0.0.1:3000/decks', {
+    fetch('https://udaci-flashcards.herokuapp.com/decks', {
       method: 'POST',
       body: JSON.stringify({ deckname }),
       headers: {
