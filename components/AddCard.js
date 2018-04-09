@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import t from 'tcomb-form-native';
+
+import { connect } from 'react-redux';
+import { addCard } from '../actions';
 
 /**** FORM CREATION AND STYLING *****/
 
@@ -65,14 +67,15 @@ class AddCard extends Component {
       headers: {
         'content-type': 'application/json'
       }
-    }).then(() => {
-      // TODO: Update specific deck
-      updateDecks();
-    });
+    })
+      .then(res => res.json())
+      .then(card => {
+        this.props.addCard(card);
+      });
   };
 
   goBack = () => {
-    this.props.navigation.dispatch(NavigationActions.back());
+    this.props.navigation.goBack();
   };
 
   render() {
@@ -101,4 +104,14 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddCard;
+const mapStateToProps = (state, ownProps) => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addCard: card => dispatch(addCard(card))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddCard);

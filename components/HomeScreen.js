@@ -33,6 +33,7 @@ class HomeScreen extends React.Component {
           flatDecks[deck.id]
             ? flatDecks[deck.id].cardIds.push(deck.card_id)
             : (flatDecks[deck.id] = {
+                id: deck.id,
                 deckname: deck.deckname,
                 score: deck.score,
                 cardIds: deckCard !== null ? [deckCard] : []
@@ -54,8 +55,6 @@ class HomeScreen extends React.Component {
   render() {
     const { decks } = this.props;
     const { decksContainer } = styles;
-
-    console.log('decks in home: ', decks);
 
     return (
       <View style={{ flex: 1 }}>
@@ -106,8 +105,6 @@ const mapStateToProps = (state, ownProps) => {
         return state.decks.byId[id];
       })
     : [];
-
-  console.log(decks);
 
   return {
     decks

@@ -64,9 +64,9 @@ class NewDeck extends Component {
       }
     })
       .then(res => res.json())
-      .then(addedDeckQuery => {
-        const newDeck = addedDeckQuery[0];
+      .then(newDeck => {
         newDeck.cardIds = [];
+        console.log('newDeck', newDeck);
         this.props.addDeck(newDeck);
         this.props.navigation.dispatch(NavigationActions.back());
       });

@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
+import { connect } from 'react-redux';
+import { receiveCards } from '../actions';
+
 class Deck extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.state.params.deck.deckname}`
   });
 
   render() {
-    const { deck, updateDecks } = this.props.navigation.state.params;
-    console.log(deck);
+    const { deck } = this.props;
+
+    console.log('deck', deck);
 
     return (
       <View style={styles.container}>
@@ -30,9 +34,7 @@ class Deck extends Component {
         <View style={styles.quizOptionsContainer}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() =>
-              this.props.navigation.navigate('AddCard', { deck, updateDecks })
-            }
+            onPress={() => this.props.navigation.navigate('AddCard', { deck })}
           >
             <Text style={styles.buttonText}>Add Cards</Text>
           </TouchableOpacity>
@@ -96,4 +98,15 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Deck;
+const mapStateToProps = (state, ownProps) => {
+  const { id } = ownProps.navigation.state.params.deck;
+  return {
+    deck: state.decks.byId[id]
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Deck);

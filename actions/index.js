@@ -24,3 +24,10 @@ export const receiveCards = cards => {
     cards
   };
 };
+
+export const addCard = card => {
+  return {
+    type: ADD_CARD,
+    card
+  };
+};

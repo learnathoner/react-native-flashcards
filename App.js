@@ -54,7 +54,8 @@ const AppNavigation = StackNavigator({
       headerTintColor: 'white',
       headerStyle: {
         backgroundColor: 'green'
-      }
+      },
+      title: 'Add Card'
     }
   },
   Quiz: {
