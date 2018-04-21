@@ -9,6 +9,7 @@ import {
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 import { receiveCards, updateScore } from '../actions';
 import IosFlashcard from './IosFlashcard';
 import AndroidFlashcard from './AndroidFlashcard';
@@ -54,9 +55,12 @@ class Quiz extends Component {
     return Math.ceil(correct / total * 100);
   }
 
+  // Run when quiz finished, updates score in db and also resets daily notifications
   updateScore() {
     const { deckname, id } = this.props.navigation.state.params.deck;
     const score = this.calculatePercent();
+
+    clearLocalNotification().then(setLocalNotification);
 
     fetch(`https://udaci-flashcards.herokuapp.com/decks/${deckname}`, {
       method: 'PUT',

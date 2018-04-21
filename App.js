@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import { setLocalNotification } from './utils/helpers';
 
 // Redux
 import { createStore } from 'redux';
@@ -62,6 +63,10 @@ const AppNavigation = StackNavigator({
 const store = createStore(reducer, devToolsEnhancer({ realtime: true }));
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={store}>
