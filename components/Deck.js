@@ -18,8 +18,6 @@ class Deck extends Component {
   render() {
     const { deck } = this.props;
 
-    console.log('deck', deck);
-
     return (
       <View style={styles.container}>
         <View style={styles.quizContainer}>

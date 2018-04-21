@@ -6,15 +6,15 @@ import {
   TouchableOpacity,
   Platform
 } from 'react-native';
+import { connect } from 'react-redux';
+import _ from 'lodash';
+
+import { receiveCards, updateScore } from '../actions';
 import IosFlashcard from './IosFlashcard';
 import AndroidFlashcard from './AndroidFlashcard';
 
-import { connect } from 'react-redux';
-import { receiveCards, updateScore } from '../actions';
-
 class Quiz extends Component {
   state = {
-    cards: [],
     currentCard: 1,
     correct: 0,
     wrong: 0
@@ -33,7 +33,8 @@ class Quiz extends Component {
   }
 
   markAnswer(result) {
-    const { currentCard, cards } = this.state;
+    const { currentCard } = this.state;
+    const { cards } = this.props;
 
     // Updatescore needs to be in callback, because setState asynchronous
     this.setState(
@@ -68,17 +69,28 @@ class Quiz extends Component {
     });
   }
 
+  resetDeck() {
+    this.setState({
+      currentCard: 1,
+      correct: 0,
+      wrong: 0
+    });
+
+    this.props.cards = _.shuffle(this.props.cards);
+  }
+
   render() {
     const { currentCard, correct, wrong } = this.state;
-    const { deckname } = this.props.navigation.state.params;
+    const { deck } = this.props.navigation.state.params;
     const { cards } = this.props;
+    console.log(this.state);
 
     return (
       <View style={styles.container}>
         {cards &&
           (currentCard <= cards.length ? (
             <View style={styles.container}>
-              <View>
+              <View style={styles.cardCount}>
                 <Text style={styles.counterText}>
                   Card {currentCard} / {cards.length}
                 </Text>
@@ -115,11 +127,35 @@ class Quiz extends Component {
             </View>
           ) : (
             <View>
-              <Text>Finished!</Text>
-              <Text>
-                You completed {deckname} with a score of{' '}
-                {this.calculatePercent()}%
-              </Text>
+              <View style={[styles.container, { flex: 2 }]}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    textAlign: 'center'
+                  }}
+                >
+                  Finished!
+                </Text>
+                <Text>
+                  You completed {deck.deckname} with a score of{' '}
+                  {this.calculatePercent()}%
+                </Text>
+              </View>
+              <View style={styles.container}>
+                <TouchableOpacity
+                  style={[styles.button, { backgroundColor: 'blue' }]}
+                  onPress={() => this.resetDeck()}
+                >
+                  <Text style={[styles.buttonText]}>RETRY</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.button, { backgroundColor: 'blue' }]}
+                  onPress={() => this.props.navigation.goBack()}
+                >
+                  <Text style={styles.buttonText}>BACK</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           ))}
       </View>
@@ -151,13 +187,19 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center'
+  },
+  cardCount: {
+    marginTop: 10,
+    marginLeft: 30,
+    alignItems: 'flex-start',
+    alignSelf: 'stretch'
   }
 });
 
 const mapStateToProps = (state, ownProps) => {
   const { deck } = ownProps.navigation.state.params;
 
-  const cards = [];
+  let cards = [];
 
   state.decks.byId[deck.id].cardIds.forEach(cardId => {
     const card = state.cards.byId[cardId];
@@ -165,6 +207,8 @@ const mapStateToProps = (state, ownProps) => {
       cards.push(card);
     }
   });
+
+  cards = _.shuffle(cards);
 
   return { cards };
 };

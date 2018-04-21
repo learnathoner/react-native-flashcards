@@ -3,18 +3,23 @@ Flashcards:
   Components:
 
     FlashCard:
-      ☐ Front / back
+      ✔ Front / back @done (2018-4-9 08:54:16)
         ✔ Flipping animation @done (2018-4-5 11:32:39)
-      ☐ Right / wrong buttons
+      ✔ Right / wrong buttons @done (2018-4-9 08:54:18)
 
     Deck Screen:
-      ☐ Makes request for cards?
-      ☐ Displays cards, basic info
-      ☐ Add card option
-      ☐ Delete deck option
+      ✔ Makes request for cards? @done (2018-4-9 08:54:20)
+      ✔ Displays cards, basic info @done (2018-4-9 08:54:22)
+      ✔ Add card option @done (2018-4-9 08:54:23)
+      
+      Delete Deck:
+        ☐ Button
+        ☐ Remove entry from Redux
+        ☐ Query to remove entry from DB
+
 
     Deck:
-      ☐ Hold number of flashCards
+      ✔ Hold number of flashCards @done (2018-4-9 08:55:07)
       ☐ Display each in random order
       ☐ Hold score for quiz
 
@@ -50,9 +55,9 @@ Flashcards:
       ✔ Manage cards with state @done (2018-4-7 17:04:44)
 
       On finish:
-        ☐ Remove card x / x screen
-        ☐ show score
-        ☐ Update DB
+        ✔ Remove card x / x screen @done (2018-4-9 08:53:40)
+        ✔ show score @done (2018-4-9 08:53:41)
+        ✔ Update DB @done (2018-4-9 08:53:42)
         ☐ Reset button
 
   Bugs:
@@ -63,7 +68,7 @@ Add later:
   SQL:
     ☐ Redo nasty looking query
   Animations:
-    ☐ Change transition on stackNavigator
+    ✔ Change transition on stackNavigator @done (2018-4-9 08:54:02)
   Server routes:
     ☐ Make routes use deck_id instead of deckname
 
